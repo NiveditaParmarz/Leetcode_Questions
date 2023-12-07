@@ -1,0 +1,17 @@
+class Solution {
+    public String largestOddNumber(String num) {
+        char arr[] =  num.toCharArray();
+        int n = arr.length;
+        if(arr[n-1]%2==1){ //string is odd
+            return num;
+        }
+        int i = n-1;
+        while(i>=0){
+            if(arr[i] % 2 == 1){ //digit is odd
+                return num.substring(0,i+1);
+            }
+            i--;
+        }
+        return "";
+    }
+}
