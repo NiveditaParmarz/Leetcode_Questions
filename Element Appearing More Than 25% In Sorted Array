@@ -1,0 +1,16 @@
+class Solution {
+    public int findSpecialInteger(int[] arr) {
+        double var =((0.25) * arr.length);
+        int freq = 1;
+        for(int j = 1; j < arr.length; j++){
+            if(arr[j]==arr[j-1]){
+                freq++;
+                if(freq>var){
+                    return arr[j];
+                }
+            }
+            else{freq= 1;}
+        }
+        return arr[0];
+    }
+}
