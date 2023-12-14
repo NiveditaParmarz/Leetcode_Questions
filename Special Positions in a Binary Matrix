@@ -1,0 +1,34 @@
+class Solution {
+    public int numSpecial(int[][] mat) {
+        int count = 0;
+        int m = mat.length;  //row length
+        int n = mat[0].length; //column length
+        //boolean flag = true;
+        for(int row = 0; row < m; row++){
+            for(int col = 0; col < n; col++){
+                if(mat[row][col]==0){ 
+                    continue;
+                } 
+                boolean flag = true;
+                for(int r = 0; r < m; r++){ //we'll reach this loop when we have found a '1' 
+                    if(r!=row && mat[r][col]==1){ //if we found another 1 in the row            
+                        flag = false;
+                        break;
+                    }
+                }
+                //we will reach this c loop when we didn't find any 1 in the row
+                for(int c = 0 ; c < n ; c++){
+                    if(c!=col && mat[row][c]==1){
+                        flag = false;
+                        break;
+                    }
+                }
+
+                if(flag){
+                    count++;
+                }
+            }
+        }
+        return count;
+    }
+}
