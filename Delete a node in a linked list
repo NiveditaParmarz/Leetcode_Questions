@@ -1,0 +1,11 @@
+Leetcode link: https://leetcode.com/problems/delete-node-in-a-linked-list/
+class Solution {
+    public void deleteNode(ListNode node) {
+        node.val = node.next.val; // we changed the value of the node we want to delete with it's next node. So the node we want to delete has the value of the node next to it.
+        ListNode temp = node.next.next; // we stored the next to next node of the node we want to delete
+        node.next = temp; // we actually deleted the node that was next of the node that we originally wanted to delete.
+                          //But instead we copied the value of the next node to the node we wanted to delete originally and linked that original node with it's next to next node, which automatically deleted the node that was in the middle of both.
+    
+        
+    }
+}
