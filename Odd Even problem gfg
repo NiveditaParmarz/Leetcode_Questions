@@ -1,0 +1,42 @@
+gfg link : https://www.geeksforgeeks.org/problems/help-nobita0532/1
+
+code: 
+class Solution {
+    public static String oddEven(String s) {
+        HashMap<Character, Integer> hm = new HashMap<>();
+        for(int i = 0 ; i < s.length(); i++){
+            if(hm.containsKey(s.charAt(i))==true){
+                int temp = hm.get(s.charAt(i));
+                hm.put(s.charAt(i),temp+1);
+            }
+            else{
+                hm.put(s.charAt(i),1);
+            }
+        }
+        
+        int x = 0;
+        int y = 0;
+        
+        for(char ch : hm.keySet()){   //using keySet method to go over only distinct charecters (otherwise the values of x and y will be incorrect) in the hashmap and iterating over hashmap keys directly.
+         
+            int freq = hm.get(ch);
+            int position = ch - 'a' + 1;
+            
+                if(freq%2==0 && position%2==0){
+                    x++;
+                }
+                if(freq%2!=0 && position%2!=0){
+                    y++;
+                }
+        }
+        
+        int sum = x + y;
+        if(sum%2==0)return "EVEN";
+        else return "ODD";
+        
+        
+        
+    }
+    
+    
+}
