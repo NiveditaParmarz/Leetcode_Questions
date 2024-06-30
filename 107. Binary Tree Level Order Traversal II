@@ -1,0 +1,37 @@
+107. Binary Tree Level Order Traversal II
+
+link: https://leetcode.com/problems/binary-tree-level-order-traversal-ii/description/
+
+class Solution {
+    public List<List<Integer>> levelOrderBottom(TreeNode root){
+        List<List<Integer>> bigList = new ArrayList<List<Integer>>();
+        Queue <TreeNode> q = new LinkedList<>();
+        Stack<List<Integer>> st = new Stack<>();
+
+        if(root==null)return bigList;
+        q.add(root);
+        while(q.size()>0){
+            List <Integer> smallList = new ArrayList<>();
+            int n = q.size();
+            
+            for(int i = 1 ; i <= n ; i++){
+                TreeNode temp = q.remove();
+                if(temp.left!=null){
+                    q.add(temp.left);
+                }
+                if(temp.right!=null){
+                    q.add(temp.right);
+                }
+                smallList.add(temp.val);
+            }
+            bigList.add(smallList);
+            st.push(smallList);
+        } 
+        List<List<Integer>> ansList = new ArrayList<List<Integer>>();
+        for(int i = 1; i <= bigList.size(); i++){
+            ansList.add(st.pop());
+        }
+        return ansList;
+
+    }
+}
