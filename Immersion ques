@@ -1,0 +1,70 @@
+sameOrNotSame
+input:
+4
+???n
+aman
+4
+aacb
+aabn
+4
+??no
+omop
+
+output: 
+Yes
+No
+No
+
+
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int noOfTestCases = sc.nextInt();
+        sc.nextLine();
+        for(int i = 1; i <= noOfTestCases; i++){
+            int length = sc.nextInt();
+            sc.nextLine();
+            String s1 = sc.nextLine();
+            String t1 = sc.nextLine();
+            System.out.println(sameOrNot(s1,t1));
+
+        }
+    }
+    public static String sameOrNot(String s, String t){
+        HashMap<Character, Integer> hm = new HashMap<>();
+        int countQuestion = 0;
+        for(int i = 0; i < t.length();i++){
+            char ch = t.charAt(i);      
+            hm.put(ch,hm.getOrDefault(ch,0)+1);      
+        }
+
+        int countLeft = t.length(); 
+        for(int i = 0; i < s.length(); i++){
+            char ch = s.charAt(i);
+            //int freq = hm.getOrDefault(ch,0);
+            if(ch=='?'){
+                countQuestion++;
+                continue; 
+            }
+            //letter hi hoga
+            if(!hm.containsKey(ch) || hm.get(ch)==0){ //this means t does not contain that letter that s contains.
+                return "No";
+            }
+            //if(hm.containsKey(ch) && hm.get(ch) > 0){
+            else{
+                hm.put(ch,hm.get(ch)-1);
+                countLeft--;
+            }
+
+            // if(hm.get(ch) == 0){ //means s mei zyaada letters hai than t (ek particular letter
+            //     return "No";
+            // }
+
+        }
+        if(countLeft != countQuestion)return "No";
+        return "Yes";
+
+    }   
+
+}
