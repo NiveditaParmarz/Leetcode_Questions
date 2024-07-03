@@ -1,8 +1,11 @@
 sameOrNotSame
+Can we string s become string t?
+the question marks can be replaced with any lowercase english alphabet.
+
 input:
-4
-???n
-aman
+4  //length of strings
+???n  //string s
+aman  //string t
 4
 aacb
 aabn
