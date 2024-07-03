@@ -37,32 +37,28 @@ public class Main {
     public static String sameOrNot(String s, String t){
         HashMap<Character, Integer> hm = new HashMap<>();
         int countQuestion = 0;
-        for(int i = 0; i < t.length();i++){
+        for(int i = 0; i < t.length();i++){  //making hashmap for letters of string t
             char ch = t.charAt(i);      
             hm.put(ch,hm.getOrDefault(ch,0)+1);      
         }
 
-        int countLeft = t.length(); 
-        for(int i = 0; i < s.length(); i++){
+        int countLeft = t.length(); //countleft as in the no of elements in the left of the hashmap
+
+        for(int i = 0; i < s.length(); i++){ //iterating over string s
             char ch = s.charAt(i);
-            //int freq = hm.getOrDefault(ch,0);
             if(ch=='?'){
                 countQuestion++;
                 continue; 
             }
             //letter hi hoga
-            if(!hm.containsKey(ch) || hm.get(ch)==0){ //this means t does not contain that letter that s contains.
+            if(!hm.containsKey(ch) || hm.get(ch)==0){ //this means t does not contain that letter that s contains, or, the hashmap(string t) does contain that letter, but it's frequency is 0(in this case the hashmap will count it as contains==true even when freq is 0 so we put that condition to check if freq is 0)
                 return "No";
             }
-            //if(hm.containsKey(ch) && hm.get(ch) > 0){
-            else{
+            
+            else{    // if(hm.containsKey(ch) && hm.get(ch) > 0)
                 hm.put(ch,hm.get(ch)-1);
                 countLeft--;
             }
-
-            // if(hm.get(ch) == 0){ //means s mei zyaada letters hai than t (ek particular letter
-            //     return "No";
-            // }
 
         }
         if(countLeft != countQuestion)return "No";
