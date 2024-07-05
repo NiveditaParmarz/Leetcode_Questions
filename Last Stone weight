@@ -1,0 +1,26 @@
+link : https://leetcode.com/problems/last-stone-weight/
+
+
+
+class Solution {
+    public int lastStoneWeight(int[] stones) {
+        if (stones.length==1) return stones[0]; 
+        PriorityQueue<Integer> maxheap = new PriorityQueue<>(Collections.reverseOrder());
+        for(int i = 0; i < stones.length; i++){
+            maxheap.add(stones[i]);
+        }
+        
+        while(maxheap.size() >= 2){
+            int x = maxheap.remove();
+            int y = maxheap.remove();
+            if(x==y)continue;
+            else{
+                if(x-y==0)continue;
+                else maxheap.add(x-y);
+            }
+        }
+        if(maxheap.size()==1)return maxheap.peek();
+        return 0;
+
+    }
+}
