@@ -1,0 +1,93 @@
+class Solution {
+    public int orangesRotting(int[][] grid){
+        int n = grid.length;
+        int m = grid[0].length;
+
+        class Pair{
+            int i; //coordinates
+            int j; //coordinates
+            int time;
+
+            Pair(int x, int y, int z){ //constructor //x,y,z are only used to set the values of the class fields i,j,time
+                i = x;
+                j = y;
+                time = z;
+            }
+        }
+
+        Queue <Pair> q = new LinkedList<>();  //queue to store pairs 
+
+        //now we will travserse over the whole 2D array to check for rotten oranges(where value is 2)
+
+        int count1 = 0;
+        int count2 = 0;
+
+        for(int i = 0; i < n; i++){ //this loop will keep adding rotten oranges in the queue
+            for(int j = 0; j < m; j++){
+                if(grid[i][j] == 2){
+                    Pair p1 = new Pair(i,j,0);
+                    q.add(p1); //initially time is at 0
+                    count2++;
+                }
+                else if(grid[i][j] == 1){
+                    count1++;
+                }
+            }
+        }
+
+        if(count1 == 0){     //no oranges are there to rot, so at time = 0 all are rotten
+            return 0;
+        }
+
+        int ans = -1;  //check is -1 required or 0 ok
+
+        while(!q.isEmpty()){
+            Pair rem = q.remove();
+            int crow = rem.i; //current row
+            int ccol = rem.j;
+            int ctime = rem.time; 
+            ans = ctime;
+
+            // now we will check all 4 sides of this removed element which is rotten, to check of it can rot adjacent neighbours or not
+
+            //top element , row - 1
+
+            if(crow - 1 >= 0 && grid[crow-1][ccol] == 1){ //means fresh orange
+                 //jis rotten orange se ye new orange bhi rot hua, uska time + 1
+                q.add(new Pair(crow-1,ccol,ctime+1));
+                //make the orange rotten now
+                grid[crow-1][ccol] = 2;
+            }
+
+            //bottom element, row + 1
+
+            if(crow + 1 < n && grid[crow+1][ccol] == 1){ 
+                q.add(new Pair(crow+1,ccol,ctime+1));
+                grid[crow+1][ccol] = 2;
+            }
+
+            //left element, col - 1
+
+            if(ccol - 1 >= 0 && grid[crow][ccol-1] == 1){  
+                q.add(new Pair(crow,ccol-1,ctime+1));
+                grid[crow][ccol-1] = 2;
+            }
+            
+            //right element, col + 1
+            if(ccol + 1 < m && grid[crow][ccol+1] == 1){  
+                q.add(new Pair(crow,ccol+1,ctime+1));
+                grid[crow][ccol+1] = 2;
+            }
+        }
+
+        for(int i = 0; i < n; i++){
+            for(int j = 0; j < m; j++){
+                if(grid[i][j] == 1){ //checking if any fresh orange is left in the matrix{
+                    return -1;
+                }
+            }
+        }
+        return ans;
+
+    }
+}
