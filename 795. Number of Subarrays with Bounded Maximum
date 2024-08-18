@@ -1,0 +1,64 @@
+Brute force:
+O(N^3) Time complexity
+
+public class Main {
+    public static void main(String[] args) {
+        int arr[] = {2,1,4,3};
+        int n = arr.length;
+        int count = 0;
+        int left = 2;
+        int right = 3;
+        int ans = (n*(n+1))/2;
+        
+        for(int sp = 0; sp < n; sp++){
+            for(int ep = sp; ep < n; ep++){
+                int max = arr[ep];
+                for(int i = sp; i <= ep; i++){
+                    if(arr[i]>max){
+                        max = arr[i];
+                    }
+                    System.out.print(arr[i] + " ");
+                }
+                if(max > right || max < left){
+                    count++;
+                }
+                System.out.println();
+            }
+            System.out.println();
+        }
+        
+        
+        System.out.println("No.of valid subarrays = " + (ans-count));
+    }
+}
+
+// -------------------------------------------------------------------------------
+
+Optimised O(N):
+
+class Solution {
+    public int numSubarrayBoundedMax(int[] arr, int left, int right) {
+        int ans = 0;
+        int lgei = 0; //last greater than right element index + 1
+        int prevValidCount = 0;
+
+        for(int ep = 0; ep < arr.length; ep++){
+            if(arr[ep] > right){
+                ans = ans + 0;
+                lgei = ep + 1;
+                prevValidCount = 0;
+            }
+
+            else if(arr[ep] >= left && arr[ep] <= right){
+                ans = ans + (ep - lgei + 1);
+                prevValidCount = ep - lgei + 1;
+            }
+            else{     // arr[ep] < left
+                ans = ans + prevValidCount;
+            }
+        }
+        
+        return ans;
+        
+    }
+}
