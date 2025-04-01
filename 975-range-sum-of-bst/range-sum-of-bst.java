@@ -14,10 +14,10 @@
  * }
  */
 class Solution {
-    int sum;
+    int sum = 0;
 
     public int rangeSumBST(TreeNode root, int low, int high) {
-        sum = 0; // Reset sum before each function call
+        // sum = 0; // Reset sum before each function call
         helper(root, low, high);
         return sum;
     }
