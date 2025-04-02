@@ -19,10 +19,10 @@ class Solution {
         if(root.val==1)return true;
 
 
-        if(root.left==null){ //means it's a leaf node (read question)
-            //leaf node's value can be true or false only.
-            return root.val==1; //will give true or false 
-        }
+        // if(root.left==null){ //means it's a leaf node (read question)
+        //     //leaf node's value can be true or false only.
+        //     return root.val==1; //will give true or false 
+        // }
 
 
         boolean a = evaluateTree(root.left);
