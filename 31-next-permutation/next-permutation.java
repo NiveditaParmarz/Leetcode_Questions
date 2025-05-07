@@ -12,13 +12,13 @@ class Solution {
         }
         if(targetIdx != -1){
             int swapIdx = -1;
-        for(int i = n-1; i >= targetIdx+1; i--){
+        for(int i = n-1; i >= targetIdx+1; i--){ //looking for the smallest number that is just greater than the smallest (targetIdx wala no. tha jo) number., so that we can bring them together.
             if(nums[i] > nums[targetIdx]){
                 swapIdx = i;
                 break;
             }
         }
-        swap(nums,targetIdx ,swapIdx);
+        swap(nums, targetIdx , swapIdx);
 
 
         }
